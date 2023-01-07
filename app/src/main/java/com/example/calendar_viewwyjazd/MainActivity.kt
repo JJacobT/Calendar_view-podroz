@@ -35,5 +35,13 @@ class MainActivity : AppCompatActivity() {
         val start = mutableListOf(0,0,0)
         val koniec = mutableListOf(0,0,0)
 
+        //Blokada
+        kalendarz.minDate = Date().time
+        kalendarz.maxDate = Date().time + 88888888888
+        //Lista
+        kalendarz.setOnDateChangeListener{_, d, m, y ->
+            data[0] = y
+            data[1] = m+1
+            data[2] = d
     }
 }
