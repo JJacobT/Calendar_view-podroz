@@ -8,6 +8,7 @@ import android.widget.TextClock
 import android.widget.TextView
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.absoluteValue
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,9 +40,20 @@ class MainActivity : AppCompatActivity() {
         kalendarz.minDate = Date().time
         kalendarz.maxDate = Date().time + 88888888888
         //Lista
-        kalendarz.setOnDateChangeListener{_, d, m, y ->
+        kalendarz.setOnDateChangeListener { _, d, m, y ->
             data[0] = y
-            data[1] = m+1
+            data[1] = m + 1
             data[2] = d
+        }
+
+        //Wyliczanie dni
+        fun rezerwacja(koniec: MutableList<Int>, poczatek : MutableList<Int>, czas_trwania : TextView) {
+            val wyjazd = (poczatek[2] * 360) + (poczatek[1] * 30) + poczatek[0]
+            val przyjazd = (koniec[2] * 360) + (koniec[1] * 30) + koniec[0]
+            val ilosc_dni = wyjazd.toChar() - przyjazd.toChar()
+            czas_trwania.text = "${ilosc_dni.absoluteValue + 1}"
+        }
+
+
     }
 }
